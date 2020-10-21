@@ -1,30 +1,43 @@
 package com.marcos.springdata.orm;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "cargos")
 public class Cargo {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String descricao;
+	@OneToMany(mappedBy = "cargo")
+	private List<Funcionario> funcionario;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	public Integer getId() {
+		return id;
+	}
 
-    private String descricao;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	@Override
+	public String toString() {
+		return "Cargo [id=" + id + ", descricao=" + descricao + "]";
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 }
